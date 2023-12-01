@@ -14,7 +14,7 @@ body {
 header {
   padding: 20px 0;
   background-color: #35363a;
-  width: 1080px;
+  width: 90%;
 }
 
 /* main */
@@ -24,7 +24,7 @@ main {
   align-items: center;
   height: 800px;
   overflow-y: scroll;
-  width: 1080px;
+  width: 90%;
 }
 main table {
   width: 90%;
@@ -35,6 +35,9 @@ nav {
   padding: 0 30px;
   color: #bdbdbe;
   justify-content: space-between;
+}
+nav div{
+  font-size: 20px;
 }
 ul {
   display: flex;
@@ -57,36 +60,33 @@ ul li .currpage {
 
 table {
   border-collapse: collapse;
-  
 }
 table thead tr th {
   height: 50px;
   border-bottom: 2px solid #35363a;
 }
-table tbody tr td{
+table tbody tr td {
   height: 40px;
   border-bottom: 1px solid #bdbdbe;
 }
-table tbody tr td a{
-  color: #007bf9 ;
+table tbody tr td a {
+  color: #007bf9;
 }
-table tbody tr td a:hover{
-  color: #11225b ;
+table tbody tr td a:hover {
+  color: #11225b;
   text-decoration: underline;
 }
 
-table tbody tr:hover{
+table tbody tr:hover {
   background-color: #ececf5;
 }
-
-
 
 /* footer */
 footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 800px;
+  width: 90%;
   padding-top: 20px;
 }
 
@@ -106,4 +106,16 @@ footer div a {
 footer div a:hover {
   color: #ffffff;
   background-color: #007bf9;
+}
+
+@media (max-width: 800px) {
+  ul {
+    flex-direction: column;
+  }
+  nav {
+    flex-direction: column;
+  }
+  nav div{
+    padding: 0 20px;
+  }
 }
