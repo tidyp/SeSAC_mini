@@ -4,18 +4,17 @@
     <meta charset="UTF-8" />
     <title>Customer Management System</title>
     <link rel="stylesheet" href="./common.css" />
-    <!-- <script src="./main.js"></script> -->
-    <script src="./users.js"></script>
+    <script src="./user.js"></script>
   </head>
   <body>
     <header>
       <nav>
         <ul>
-          <li><a class="currpage" href="/users">users</a></li>
-          <li><a href="/orders">orders</a></li>
-          <li><a href="/orderitems">orderitems</a></li>
-          <li><a href="/items">items</a></li>
-          <li><a href="/stores">stores</a></li>
+          <li><a id="users" href="/crm/users">users</a></li>
+          <li><a id="orders" href="/crm/orders">orders</a></li>
+          <li><a id="orderitems" href="/crm/orderitems">orderitems</a></li>
+          <li><a id="items" href="/crm/items">items</a></li>
+          <li><a id="stores" href="/crm/stores">stores</a></li>
         </ul>
         <div>search</div>
         <div>login</div>
@@ -25,6 +24,7 @@
       <table>
         <thead>
           <tr>
+            <th>Id</th>
             <th>Name</th>
             <th>Gender</th>
             <th>Age</th>
@@ -32,7 +32,7 @@
             <th>Address</th>
           </tr>
         </thead>
-        <tbody></tbody>
+        <tbody class="dispalytable"></tbody>
       </table>
     </main>
     <footer></footer>

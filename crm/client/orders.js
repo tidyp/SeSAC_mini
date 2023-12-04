@@ -1,45 +1,25 @@
-displayTable = (createTable) => {
+const currBar = (currpage) => {
+  document.getElementById(`${currpage}`).classList.add("active");
+};
+
+const Laylout = (createTable) => {
   createTable.forEach((order) => {
     const html = `
-      <tr id="${order.Id}">
-        <td><a href="#">${order.OrderAt}</a></td>
-        <td>${order.StoreId}</td>
-        <td>${order.orderId}</td>
-      </tr>`;
-    document.querySelector("tbody").insertAdjacentHTML("beforeend", html);
+    <tr id=${order.Id}>
+    <td><a href="/orderDetail/${order.Id}">${order.Id}</a></td>
+    <td>${order.OrderAt}</td>
+    <td>${order.StoreId}</td>
+    <td>${order.UserId}</td>
+  </tr>`;
+    document
+      .querySelector(".dispalytable")
+      .insertAdjacentHTML("beforeend", html);
   });
 };
 
-
-displayPageBtn = (pageNum = 0) => {
-  // const num = data / 20;
-  console.log(pageNum);
-  const num = 50;
-  let prebtn = ``;
-  let nextbtn = ``;
-  let btnlist = "";
-
-  sbtn = Math.max(1, +pageNum - 6);
-  ebtn = Math.min(50, +pageNum + 5);
-
-  for (let i = sbtn; i <= ebtn; i++) {
-    btnlist += `<div><a href=/orders/${i}>${i}</a></div>`;
-  }
-  if (+pageNum > 1) {
-    prebtn = `<div><a href='#'>Previous</a></div>`;
-  }
-
-  if (+pageNum < 50) {
-    nextbtn = `<div><a href='#'>Next</a></div>`;
-  }
-
-  const pagebtn = prebtn + btnlist + nextbtn;
-  document.querySelector("footer").innerHTML = "";
-  document.querySelector("footer").insertAdjacentHTML("beforeend", pagebtn);
-};
-
-const getData = async (pageNum = 1) => {
-  await fetch(`/api/orders/${pageNum}`, {
+// 페이지에 맞는 데이터 요청 및 테이블 작성
+const displayTable = async (page, pageNum = 1) => {
+  await fetch(`/api/${page}/${pageNum}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -47,16 +27,18 @@ const getData = async (pageNum = 1) => {
   })
     .then((res) => res.json())
     .then((data) => {
-      console.log(data.error)
-      displayTable(data); // table
+      Laylout(data); // table
     })
     .catch((err) => {
       console.log("에러", err);
     });
 };
 
+// 페이지 load시 실행
 document.addEventListener("DOMContentLoaded", () => {
-  const pageNum = window.location.pathname.split("/")[2];
-  getData(pageNum);
-  displayPageBtn(pageNum);
+  const currpage = window.location.pathname.split("/")[2]; // page: users, orders, orderitems, items, stores
+  const currpageNum = window.location.pathname.split("/")[3]; // pageNum = 1, 2, 3, 4....
+  currBar(currpage);
+  displayTable(currpage, currpageNum);
+  getDataTotal(currpage, currpageNum);
 });

@@ -36,7 +36,7 @@ nav {
   color: #bdbdbe;
   justify-content: space-between;
 }
-nav div{
+nav div {
   font-size: 20px;
 }
 ul {
@@ -115,7 +115,22 @@ footer div a:hover {
   nav {
     flex-direction: column;
   }
-  nav div{
+  nav div {
     padding: 0 20px;
   }
+}
+
+.tableName {
+  font-size: 24px;
+  font-weight: 700;
+  padding-top: 20px;
+}
+
+.active {
+  color: white;
+}
+
+.active2{
+  color: #ffffff;
+  background-color: #007bf9;
 }

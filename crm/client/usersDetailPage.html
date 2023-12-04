@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Customer Management System</title>
+    <link rel="stylesheet" href="./common.css" />
+    <script src="./userDetail.js"></script>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li><a id="users" href="/crm/users">users</a></li>
+          <li><a id="orders" href="/crm/orders">orders</a></li>
+          <li><a id="orderitems" href="/crm/orderitems">orderitems</a></li>
+          <li><a id="items" href="/crm/items">items</a></li>
+          <li><a id="stores" href="/crm/stores">stores</a></li>
+        </ul>
+        <div>search</div>
+        <div>login</div>
+      </nav>
+    </header>
+    <main>
+      <table>
+        <div class="tableName">고객정보</div>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Gender</th>
+            <th>Age</th>
+            <th>Birthdate</th>
+            <th>Address</th>
+          </tr>
+        </thead>
+        <tbody class="usertable"></tbody>
+      </table>
+
+      <table>
+        <div class="tableName">주문정보</div>
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>OrderAt</th>
+            <th>StoreId</th>
+            <!-- <th>UserId</th> -->
+          </tr>
+        </thead>
+        <tbody class="ordertable"></tbody>
+      </table>
+
+      <table>
+        <div class="tableName">자주 방문한 매장 Top 5</div>
+        <thead>
+          <tr>
+            <th>Store Id</th>
+            <th>Store Rank</th>
+            <th>Count</th>
+          </tr>
+        </thead>
+        <tbody class="storetable"></tbody>
+
+        <table>
+        <div class="tableName">자주 주문한 상품명 Top 5</div>
+        <thead>
+          <tr>
+            <th>Item Id</th>
+            <th>Item Rank</th>
+            <th>Count</th>
+            <!-- <th>UserId</th> -->
+          </tr>
+        </thead>
+        <tbody class="itemtable"></tbody>
+    </main>
+    <footer></footer>
+  </body>
+</html>
