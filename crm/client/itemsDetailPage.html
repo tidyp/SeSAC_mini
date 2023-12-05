@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <title>Customer Management System</title>
     <link rel="stylesheet" href="./common.css" />
-    <script src="./items.js"></script>
+    <script src="./itemsDetail.js"></script>
   </head>
   <body>
     <header>
@@ -22,16 +22,29 @@
     </header>
     <main>
       <table>
+        <div class="tableName">상품 정보</div>
         <thead>
           <tr>
-            <th>Id</th>
             <th>Name</th>
             <th>Type</th>
             <th>UnitPrice</th>
           </tr>
         </thead>
-        <tbody class="dispalytable"></tbody>
+        <tbody class="itemtable"></tbody>
       </table>
+      
+      <table>
+        <div class="tableName">월간 매출액</div>
+        <thead>
+          <tr>
+            <th>Month</th>
+            <th>Total Revenue</th>
+            <th>Item Count</th>
+          </tr>
+        </thead>
+        <tbody class="month_sales_table"></tbody>
+      </table>
+
     </main>
     <footer></footer>
   </body>

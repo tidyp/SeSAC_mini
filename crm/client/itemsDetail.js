@@ -1,19 +1,18 @@
 displayOrderTable = (createTable) => {
-  createTable.forEach((order) => {
+  createTable.forEach((item) => {
     const html = `
-      <tr id="${order.Id}">
-        <td><a href="${order.Id}">${order.Id}</a></td>
-        <td>${order.OrderAt}</td>
-        <td>${order.StoreId}</td>
-        <td>${order.UserId}</td>
+      <tr id="${item.Name}">
+        <td>${item.Name}</td>
+        <td>${item.Type}</td>
+        <td>${item.UnitPrice}</td>
       </tr>`;
-    document.querySelector(".ordertable").insertAdjacentHTML("beforeend", html);
+    document.querySelector(".itemtable").insertAdjacentHTML("beforeend", html);
   });
 };
 
-const getDataOrder = async (orderId = 1) => {
-  console.log(orderId)
-  await fetch(`/api/detail/order/aaa/${orderId}`, {
+const getDataOrder = async (itemId = 1) => {
+  console.log(itemId)
+  await fetch(`/api/detail/item/aaa/${itemId}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -31,5 +30,6 @@ const getDataOrder = async (orderId = 1) => {
 
 document.addEventListener("DOMContentLoaded", () => {
   const pageNum = window.location.pathname.split("/")[3];
+  console.log(pageNum)
   getDataOrder(pageNum);
 });

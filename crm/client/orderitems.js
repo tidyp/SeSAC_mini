@@ -1,44 +1,35 @@
-displayTable = (createTable) => {
-  createTable.forEach((orderitem) => {
-    const html = `
-      <tr id="${orderitem.Id}">
-        <td><a href="#">${orderitem.OrderId}</a></td>
-        <td><a href="#">${orderitem.ItemId}</a></td>
-      </tr>`;
-    document.querySelector("tbody").insertAdjacentHTML("beforeend", html);
-  });
-};
-
-
-displayPageBtn = (pageNum = 0) => {
-  // const num = data / 20;
-  console.log(pageNum);
-  const num = 50;
+// 버튼표시
+const displayPageBtn = (MAXPAGE, currpageNum = 0) => {
+  const maxPage = +MAXPAGE / 20;
   let prebtn = ``;
   let nextbtn = ``;
   let btnlist = "";
 
-  sbtn = Math.max(1, +pageNum - 6);
-  ebtn = Math.min(50, +pageNum + 5);
+  sbtn = Math.max(1, +currpageNum - 6);
+  ebtn = Math.min(maxPage, +currpageNum + 5);
 
   for (let i = sbtn; i <= ebtn; i++) {
-    btnlist += `<div><a href=/orderitems/${i}>${i}</a></div>`;
+    if (i == currpageNum) {
+      btnlist += `<div><a class='active2' href='${i}'>${i}</a></div>`;
+    } else {
+      btnlist += `<div><a href='${i}'>${i}</a></div>`;
+    }
   }
-  if (+pageNum > 1) {
-    prebtn = `<div><a href='#'>Previous</a></div>`;
+  if (+currpageNum > 1) {
+    prebtn = `<div><a href='${+currpageNum - 1}'>Previous</a></div>`;
   }
 
-  if (+pageNum < 50) {
-    nextbtn = `<div><a href='#'>Next</a></div>`;
+  if (+currpageNum < maxPage) {
+    nextbtn = `<div><a href='${+currpageNum + 1}'>Next</a></div>`;
   }
 
   const pagebtn = prebtn + btnlist + nextbtn;
   document.querySelector("footer").innerHTML = "";
   document.querySelector("footer").insertAdjacentHTML("beforeend", pagebtn);
 };
-
-const getData = async (pageNum = 1) => {
-  await fetch(`/api/orderitems/${pageNum}`, {
+// 총페이지수
+const getDataTotal = async (currpage, currpageNum) => {
+  await fetch(`/api/count/${currpage}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -46,16 +37,57 @@ const getData = async (pageNum = 1) => {
   })
     .then((res) => res.json())
     .then((data) => {
-      console.log(data.error)
-      displayTable(data); // table
+      const MAXPAGE = data[0].MAXPAGE;
+      displayPageBtn(MAXPAGE, currpageNum);
     })
     .catch((err) => {
       console.log("에러", err);
     });
 };
 
+const Laylout = (createTable) => {
+  createTable.forEach((orderitem) => {
+    const html = `
+      <tr id="${orderitem.Id}">
+        <td><a href="/crm/orderitemDetail/${orderitem.Id}">${orderitem.Id}</a></td>
+        <td><a href="/crm/orderDetail/${orderitem.OrderId}">${orderitem.OrderId}</a></td>
+        <td><a href="/crm/itemDetail/${orderitem.ItemId}">${orderitem.ItemId}</a></td>
+      </tr>`;
+    document.querySelector(".dispalytable").insertAdjacentHTML("beforeend", html);
+  });
+};
+
+// 페이지에 맞는 데이터 요청 및 테이블 작성
+const displayTable = async (page, pageNum = 1) => {
+  await fetch(`/api/${page}/${pageNum}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      Laylout(data); // table
+    })
+    .catch((err) => {
+      console.log("에러", err);
+    });
+};
+
+const currBar = (currpage) => {
+  document.getElementById(`${currpage}`).classList.add("active");
+};
+
+// 페이지 load시 실행
 document.addEventListener("DOMContentLoaded", () => {
-  const pageNum = window.location.pathname.split("/")[2];
-  getData(pageNum);
-  displayPageBtn(pageNum);
+  const currpage = window.location.pathname.split("/")[2]; // page: users, orders, orderitems, items, stores
+  const currpageNum = window.location.pathname.split("/")[3]; // pageNum = 1, 2, 3, 4....
+
+  currBar(currpage);
+  displayTable(currpage, currpageNum);
+  getDataTotal(currpage, currpageNum);
 });
+
+
+
+

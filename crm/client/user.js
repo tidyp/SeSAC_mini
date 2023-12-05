@@ -87,6 +87,7 @@ const currBar = (currpage) => {
 document.addEventListener("DOMContentLoaded", () => {
   const currpage = window.location.pathname.split("/")[2]; // page: users, orders, orderitems, items, stores
   const currpageNum = window.location.pathname.split("/")[3]; // pageNum = 1, 2, 3, 4....
+
   currBar(currpage);
   displayTable(currpage, currpageNum);
   getDataTotal(currpage, currpageNum);
