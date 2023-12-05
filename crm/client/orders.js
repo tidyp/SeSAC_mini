@@ -9,14 +9,18 @@ const displayPageBtn = (MAXPAGE, currpageNum = 0) => {
   ebtn = Math.min(maxPage, +currpageNum + 5);
 
   for (let i = sbtn; i <= ebtn; i++) {
-    btnlist += `<div><a href=/crm/users/${i}>${i}</a></div>`;
+    if (i == currpageNum) {
+      btnlist += `<div><a class='active2' href='${i}'>${i}</a></div>`;
+    } else {
+      btnlist += `<div><a href='${i}'>${i}</a></div>`;
+    }
   }
   if (+currpageNum > 1) {
     prebtn = `<div><a href='${+currpageNum - 1}'>Previous</a></div>`;
   }
 
   if (+currpageNum < maxPage) {
-    nextbtn = `<div><a href='${+currpageNum + 1}'>Previous</a></div>`;
+    nextbtn = `<div><a href='${+currpageNum + 1}'>Next</a></div>`;
   }
 
   const pagebtn = prebtn + btnlist + nextbtn;
@@ -25,7 +29,7 @@ const displayPageBtn = (MAXPAGE, currpageNum = 0) => {
 };
 // 총페이지수
 const getDataTotal = async (currpage, currpageNum) => {
-  await fetch(`/api/${currpage}/count`, {
+  await fetch(`/api/count/${currpage}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -39,12 +43,6 @@ const getDataTotal = async (currpage, currpageNum) => {
     .catch((err) => {
       console.log("에러", err);
     });
-};
-
-// ---
-
-const currBar = (currpage) => {
-  document.getElementById(`${currpage}`).classList.add("active");
 };
 
 const Laylout = (createTable) => {
@@ -79,10 +77,15 @@ const displayTable = async (page, pageNum = 1) => {
     });
 };
 
+const currBar = (currpage) => {
+  document.getElementById(`${currpage}`).classList.add("active");
+};
+
 // 페이지 load시 실행
 document.addEventListener("DOMContentLoaded", () => {
   const currpage = window.location.pathname.split("/")[2]; // page: users, orders, orderitems, items, stores
   const currpageNum = window.location.pathname.split("/")[3]; // pageNum = 1, 2, 3, 4....
+
   currBar(currpage);
   displayTable(currpage, currpageNum);
   getDataTotal(currpage, currpageNum);

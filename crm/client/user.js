@@ -1,3 +1,4 @@
+// ----------------------------------------------------------------
 // 버튼표시
 const displayPageBtn = (MAXPAGE, currpageNum = 0) => {
   const maxPage = +MAXPAGE / 20;
@@ -92,3 +93,56 @@ document.addEventListener("DOMContentLoaded", () => {
   displayTable(currpage, currpageNum);
   getDataTotal(currpage, currpageNum);
 });
+
+// ----------------------------------------------------------------
+// 검색버튼
+// const searchHandler = () => {
+//   const searchValue = document.getElementById("inputtext").value.trim();
+//   const searchBtn = document.getElementById("searchButton");
+//   const searchInput = document.getElementById("inputtext");
+//   searchBtn.addEventListener("click", (e) => {
+//     e.preventDefault("");
+//     console.log("click");
+//     const inputValue = searchInput.value;
+
+//     console.log(inputValue);
+
+//     fetch(`api/users/:id?name=${inputValue}`, { method: "GET" })
+//       .then((res) => res.json())
+//       .then((data) => {
+//         console.log(data);
+//         Laylout(data); // table
+//       })
+//       .catch((error) => {
+//         console.error("오류 발생:", error);
+//       });
+//   });
+// };
+let searchValue;
+
+const searchHandler = async () => {
+  const currpage = window.location.pathname.split("/")[2]; // page: users, orders, orderitems, items, stores
+  const currpageNum = window.location.pathname.split("/")[3]; // pageNum = 1, 2, 3, 4....
+  console.log(currpage, currpageNum);
+
+  // const searchValue = document.getElementById("inputtext").value.trim();
+  searchValue = document.getElementById("inputtext").value.trim();
+  document.querySelector(".dispalytable").innerHTML = "";
+  await fetch(`/api/${currpage}?name=${searchValue}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+      Laylout(data);
+      getDataTotal(currpage, currpageNum);
+      // Laylout(data); // table
+    })
+    .catch((err) => {
+      console.log("에러", err);
+    });
+    
+};

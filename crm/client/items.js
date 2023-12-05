@@ -58,7 +58,6 @@ const Laylout = (createTable) => {
       .querySelector(".dispalytable")
       .insertAdjacentHTML("beforeend", html);
   });
-
 };
 
 // 페이지에 맞는 데이터 요청 및 테이블 작성
@@ -86,7 +85,7 @@ const currBar = (currpage) => {
 document.addEventListener("DOMContentLoaded", () => {
   const currpage = window.location.pathname.split("/")[2]; // page: users, orders, orderitems, items, stores
   const currpageNum = window.location.pathname.split("/")[3]; // pageNum = 1, 2, 3, 4....
-
+  
   currBar(currpage);
   displayTable(currpage, currpageNum);
   getDataTotal(currpage, currpageNum);
