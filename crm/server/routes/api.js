@@ -218,7 +218,8 @@ router.get("/detail/user/ddd/:userId?", (req, res) => {
     });
 });
 
-router.get("/detail/order/:orderId?", (req, res) => {
+// ----------------------------------------
+router.get("/detail/order/aaa/:orderId?", (req, res) => {
   console.log(`api 요청됨: ${req.url}`);
   const orderId = req.params.orderId;
   console.log(orderId);
@@ -236,11 +237,29 @@ router.get("/detail/order/:orderId?", (req, res) => {
     });
 });
 
-router.get("/detail/item/:itemId?", (req, res) => {
+router.get("/detail/item/aaa/:itemId?", (req, res) => {
   console.log(`api 요청됨: ${req.url}`);
   const itemId = req.params.itemId;
   console.log(itemId);
   db.execute(`SELECT * FROM items WHERE Id LIKE ?#`, [itemId])
+    .then(([rows, fieldData]) => {
+      if (rows.length == 0) {
+        console.log(rows.length);
+        res.status(404).json({ error: "데이터 없음." });
+      } else {
+        res.json(rows);
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
+router.get("/detail/store/aaa/:storeId?", (req, res) => {
+  console.log(`api 요청됨: ${req.url}`);
+  const storeId = req.params.storeId;
+  console.log(storeId);
+  db.execute(`SELECT * FROM stores WHERE Id LIKE ?#`, [storeId])
     .then(([rows, fieldData]) => {
       if (rows.length == 0) {
         console.log(rows.length);

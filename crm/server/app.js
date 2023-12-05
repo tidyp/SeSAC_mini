@@ -77,6 +77,12 @@ app.get("/crm/itemDetail/:id?", (req, res) => {
   res.sendFile(htmlFilePath);
 });
 
+// GET: detail-Page
+app.get("/crm/storeDetail/:id?", (req, res) => {
+  const htmlFilePath = path.join(rootDir, "..", "client", "storesDetailPage.html");
+  res.sendFile(htmlFilePath);
+});
+
 
 
 // REST API
