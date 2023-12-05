@@ -305,6 +305,35 @@ router.get("/detail/item/aaa/:itemId?", (req, res) => {
       console.log(err);
     });
 });
+router.get("/detail/item/bbb/:itemId?", (req, res) => {
+  console.log(`api 요청됨: ${req.url}`);
+  const itemId = req.params.itemId;
+  console.log(itemId);
+  db.execute(`
+  SELECT substr(o.orderAt, 6, 2) AS Datemonth, SUM(UnitPrice) AS month_sales_sum, COUNT(UnitPrice) AS month_sales_count
+FROM stores s
+JOIN orders o
+  ON s.Id = o.StoreId
+JOIN orderitems oi
+  ON o.Id = oi.OrderId
+JOIN items i
+  ON i.Id = oi.ItemId
+WHERE i.Id = '${itemId}'
+GROUP BY substr(o.orderAt, 6, 2)
+ORDER BY Datemonth;
+  `)
+    .then(([rows, fieldData]) => {
+      if (rows.length == 0) {
+        console.log(rows.length);
+        res.status(404).json({ error: "데이터 없음." });
+      } else {
+        res.json(rows);
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
 
 router.get("/detail/store/aaa/:storeId?", (req, res) => {
   console.log(`api 요청됨: ${req.url}`);
@@ -350,7 +379,7 @@ router.get("/detail/store/bbb/:orderId?", (req, res) => {
   console.log(`dwqdqwdqdqdwqdqwdwq ${month === undefined}`);
   let query = "";
 
-  if (month === 'undefined') {
+  if (month === "undefined") {
     query = `
     SELECT s.id, substr(o.orderAt, 1, 7) AS Month, SUM(UnitPrice) AS Total_Revenue, Count(UnitPrice) AS Item_Count
     FROM stores s
@@ -380,8 +409,33 @@ router.get("/detail/store/bbb/:orderId?", (req, res) => {
     `;
   }
 
-  console.log(query);
+  db.execute(query)
+    .then(([rows, fieldData]) => {
+      if (rows.length == 0) {
+        console.log(rows.length);
+        res.status(404).json({ error: "데이터 없음." });
+      } else {
+        res.json(rows);
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
 
+router.get("/detail/store/ccc/:orderId?", (req, res) => {
+  console.log(`api 요청됨: ${req.url}`);
+  const orderId = req.params.orderId;
+  let query = `
+  SELECT u.id, u.Name, COUNT(*) AS frequency
+  FROM users u
+  JOIN orders o ON u.Id = o.UserId
+  JOIN stores s ON s.Id = o.storeId
+  WHERE s.Id = '${orderId}'
+  GROUP BY u.id, u.Name
+  ORDER BY COUNT(*) DESC
+  LIMIT 5
+    `;
   db.execute(query)
     .then(([rows, fieldData]) => {
       if (rows.length == 0) {
