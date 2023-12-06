@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <title>Customer Management System</title>
-    <link rel="stylesheet" href="./common.css" />
-    <script src="./orderitemsDetail.js"></script>
+    <link rel="stylesheet" href="/common.css" />
+    <script src="/stores.js"></script>
   </head>
   <body>
     <header>
@@ -24,15 +24,34 @@
       <table>
         <div class="tableName">상품 주문 정보</div>
         <thead>
-          <tr>
-            <th>Id</th>
-            <th>OrderId</th>
-            <th>ItemId</th>
-          </tr>
+          <tr class="thead1"></tr>
         </thead>
-        <tbody class="ordertable"></tbody>
+        <tbody class="tbody1"></tbody>
       </table>
 
+      <table>
+        <div class="tableName">월간 매출액</div>
+        <thead>
+          <tr>
+            <th>Month</th>
+            <th>Total Revenue</th>
+            <th>Item Count</th>
+          </tr>
+        </thead>
+        <tbody class="tbody2"></tbody>
+      </table>
+
+      <table>
+        <div class="tableName">단골 고객</div>
+        <thead>
+          <tr>
+            <th>Uesr_Id</th>
+            <th>User_Name</th>
+            <th>frequency</th>
+          </tr>
+        </thead>
+        <tbody class="tbody3"></tbody>
+      </table>
     </main>
     <footer></footer>
   </body>

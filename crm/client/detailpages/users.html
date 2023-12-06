@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <title>Customer Management System</title>
-    <link rel="stylesheet" href="./common.css" />
-    <script src="./userDetail.js"></script>
+    <link rel="stylesheet" href="/common.css" />
+    <script src="/users.js"></script>
   </head>
   <body>
     <header>
@@ -24,28 +24,21 @@
       <table>
         <div class="tableName">고객정보</div>
         <thead>
-          <tr>
-            <th>Name</th>
-            <th>Gender</th>
-            <th>Age</th>
-            <th>Birthdate</th>
-            <th>Address</th>
-          </tr>
+          <tr class="thead1"></tr>
         </thead>
-        <tbody class="usertable"></tbody>
+        <tbody class="tbody1"></tbody>
       </table>
 
       <table>
         <div class="tableName">주문정보</div>
         <thead>
           <tr>
-            <th>Id</th>
-            <th>OrderAt</th>
-            <th>StoreId</th>
-            <!-- <th>UserId</th> -->
+            <th>영수증</th>
+            <th>구매일시</th>
+            <th>매장정보</th>
           </tr>
         </thead>
-        <tbody class="ordertable"></tbody>
+        <tbody class="tbody2"></tbody>
       </table>
 
       <table>
@@ -57,9 +50,9 @@
             <th>Count</th>
           </tr>
         </thead>
-        <tbody class="storetable"></tbody>
+        <tbody class="tbody3"></tbody>
       </table>
-      
+
       <table>
         <div class="tableName">자주 주문한 상품명 Top 5</div>
         <thead>
@@ -67,10 +60,9 @@
             <th>Item Id</th>
             <th>Item Rank</th>
             <th>Count</th>
-            <!-- <th>UserId</th> -->
           </tr>
         </thead>
-        <tbody class="itemtable"></tbody>
+        <tbody class="tbody4"></tbody>
       </table>
     </main>
     <footer></footer>

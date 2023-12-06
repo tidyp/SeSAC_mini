@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <title>Customer Management System</title>
     <link rel="stylesheet" href="./common.css" />
-    <script src="./orderitems.js"></script>
+    <link rel="stylesheet" href="./main.css" />
   </head>
   <body>
     <header>
@@ -21,16 +21,20 @@
       </nav>
     </header>
     <main>
-      <table>
-        <thead>
-          <tr>
-            <th>Id</th>
-            <th>OrderId</th>
-            <th>ItemId</th>
-          </tr>
-        </thead>
-        <tbody class="dispalytable"></tbody>
-      </table>
+      <div class="container">
+        <div class="loginbox">
+          <div class="picture"></div>
+          <div class="input">
+            <form>
+              <p>CMS</p>
+              <input type="text" placeholder="email"/>
+              <input type="text" placeholder="password" />
+              <button>Log in</button>
+              <button>Sign in</button>
+            </form>
+          </div>
+        </div>
+      </div>
     </main>
     <footer></footer>
   </body>
