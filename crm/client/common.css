@@ -93,9 +93,8 @@ footer {
 /* footer div{
   width: 30px;
 } */
-footer div a {
+footer div {
   font-weight: 700;
-  width: 20px;
   margin: 0 2px;
   padding: 10px;
   border: 1px solid #007acc;
@@ -103,21 +102,9 @@ footer div a {
   color: #007bf9;
   background-color: #ffffff;
 }
-footer div a:hover {
+footer div:hover {
   color: #ffffff;
   background-color: #007bf9;
-}
-
-@media (max-width: 800px) {
-  ul {
-    flex-direction: column;
-  }
-  nav {
-    flex-direction: column;
-  }
-  nav div {
-    padding: 0 20px;
-  }
 }
 
 .tableName {
@@ -130,7 +117,26 @@ footer div a:hover {
   color: white;
 }
 
-.active2{
+.active2 {
   color: #ffffff;
   background-color: #007bf9;
+}
+
+#inputtext {
+  padding: 6px;
+}
+#searchButton {
+  padding: 4px;
+}
+
+@media (max-width: 800px) {
+  ul {
+    flex-direction: column;
+  }
+  nav {
+    flex-direction: column;
+  }
+  nav div {
+    padding: 0 20px;
+  }
 }

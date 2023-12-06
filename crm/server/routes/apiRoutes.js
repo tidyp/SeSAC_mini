@@ -9,6 +9,7 @@ const router = express.Router();
 router.get("/:tableName?/:pageNum?", async (req, res) => {
   console.log(`API 요청됨: ${req.url}`);
   const tableName = req.params.tableName;
+  console.log('dw',req.query.name)
   const searchName = req.query.name;
   const pageNum = +req.params.pageNum || 1;
   const offset = pageNum === 1 ? 0 : (pageNum - 1) * 20;
@@ -28,6 +29,7 @@ router.get("/:tableName?/:pageNum?", async (req, res) => {
     const [header] = await db.execute(querytableheader);
     const [body] = await db.execute(query, [`%${searchName}%`]);
     const [totalPage] = await db.execute(queryPage, [`%${searchName}%`]);
+    
     res.json({
       header,
       body,

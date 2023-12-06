@@ -1,4 +1,4 @@
-import express, { query } from "express";
+import express from "express";
 import apiRoutes from "./routes/apiRoutes.js";
 import path from "path";
 
@@ -19,6 +19,7 @@ app.get("/crm/:table?/:id?", (req, res) => {
   const htmlFilePath = path.join(rootDir, "..", "client", "displayTable.html");
   res.sendFile(htmlFilePath);
 });
+
 app.get("/crm/:table?/detail/:id?", (req, res) => {
   const detailPage = `${req.params.table}.html`;
   const htmlFilePath = path.join(rootDir, "..", "client", 'detailpages', detailPage);

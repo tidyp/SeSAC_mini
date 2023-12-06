@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const currpage = window.location.pathname.split("/")[2];
   const pageId = window.location.pathname.split("/")[4];
 
-  // console.log(window.location.search);
+  // window.location.seacrh
 
   await getData(currpage, pageId);
   await currBar(currpage);
